@@ -17,4 +17,5 @@ export interface IFeed extends Document {
 
 export interface IFeedBaseDocument extends Model<IFeed> {
 	getFeeds(): IFeed[];
+	getMyFeeds(email: string): IFeed[];
 }

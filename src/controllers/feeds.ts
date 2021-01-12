@@ -18,29 +18,42 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 			image: imageUrl,
 			caption,
 			owner: user,
-			// eslint-disable-next-line no-underscore-dangle
 		});
-		console.log(newFeed);
 		const createdFeed = await newFeed.createFeed();
 		return res.status(httpStatus.CREATED).json(createdFeed);
 	} catch (error) {
-		console.error(`Issue in controller ${error}`);
 		return next(error);
 	}
 };
 
-const getAll = (req: Request, res: Response, next: NextFunction) => {
+const getAllFeeds = async (req: Request, res: Response, next: NextFunction) => {
 	// Secure routes middleware will automatically add user object to req.user
-	if (req.user) {
-		return res.json(req.user);
+	try {
+		const feeds = await Feed.getFeeds();
+		res.status(httpStatus.ACCEPTED).json(feeds);
+	} catch (error) {
+		const Issues = new APIError(
+			`Issue fetching feeds ${error}`,
+			httpStatus.INTERNAL_SERVER_ERROR
+		);
+		next(Issues);
 	}
-
-	const userNotFound = new APIError(
-		'User not found',
-		httpStatus.NOT_FOUND,
-		true
-	);
-	return next(userNotFound);
 };
 
-export { create, getAll };
+const getMyFeeds = async (req: Request, res: Response, next: NextFunction) => {
+	// Secure routes middleware will automatically add user object to req.user
+	try {
+		const { user } = req;
+		const { email } = user as any;
+		const feeds = await Feed.getMyFeeds(email);
+		res.status(httpStatus.ACCEPTED).json(feeds);
+	} catch (error) {
+		const Issues = new APIError(
+			`Issue fetching my feeds ${error}`,
+			httpStatus.INTERNAL_SERVER_ERROR
+		);
+		next(Issues);
+	}
+};
+
+export { create, getAllFeeds, getMyFeeds };

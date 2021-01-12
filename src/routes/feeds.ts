@@ -1,10 +1,10 @@
 import router from 'express';
-import { create, getAll } from '../controllers/feeds';
+import { create, getAllFeeds, getMyFeeds } from '../controllers/feeds';
 
 const routes = router.Router();
 
 routes.post('/create', create);
-
-routes.get('/getAll', getAll);
+routes.get('/all', getAllFeeds);
+routes.get('/my', getMyFeeds);
 
 export default routes;

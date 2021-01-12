@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import { modelNames } from '../../utils/constants';
 import { createFeed } from './methods';
-import { getFeeds } from './static';
+import { getFeeds, getMyFeeds } from './static';
 import { IFeed, IFeedBaseDocument } from './interface';
 import feedSchema from './schema';
 
 feedSchema.method({ createFeed });
-feedSchema.static({ getFeeds });
+feedSchema.static({ getFeeds, getMyFeeds });
 
 const User = mongoose.model<IFeed>(
 	modelNames.feed,
