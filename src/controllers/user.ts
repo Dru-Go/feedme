@@ -54,20 +54,6 @@ const getTokenOwner = (req: Request, res: Response, next: NextFunction) => {
 	return next(userNotFound);
 };
 
-// const activateAccount = async (
-// 	req: Request,
-// 	res: Response,
-// 	next: NextFunction
-// ) => {
-// 	const { token, email } = req.body;
-// 	try {
-// 		const verifiedUser = await User.validateActivationToken(token, email);
-// 		res.json(verifiedUser);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// };
-
 export {
 	createUserController,
 	loginController,
