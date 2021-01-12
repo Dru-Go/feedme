@@ -1,0 +1,13 @@
+node_modules
+build
+coverage
+package-lock.json
+.data
+.env
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+.nyc_output
