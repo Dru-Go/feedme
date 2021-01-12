@@ -13,7 +13,6 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 	const { caption } = body;
 	try {
 		const imageUrl = await uploadImage(files.image);
-		console.log(imageUrl);
 
 		const newFeed = new Feed({
 			image: imageUrl,
@@ -22,7 +21,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 			// eslint-disable-next-line no-underscore-dangle
 		});
 		console.log(newFeed);
-		const createdFeed = newFeed.createFeed();
+		const createdFeed = await newFeed.createFeed();
 		return res.status(httpStatus.CREATED).json(createdFeed);
 	} catch (error) {
 		console.error(`Issue in controller ${error}`);
