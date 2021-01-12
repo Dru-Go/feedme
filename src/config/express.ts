@@ -9,6 +9,7 @@ import firebase from 'firebase';
 import fileUpload from 'express-fileupload';
 import expressWinston from 'express-winston';
 import httpStatus from 'http-status';
+import AppError from '../errors/APPError';
 import logger from './winston';
 import { mappedVars, serviceAccount, firebaseConfig } from './environments';
 import APIError from '../errors/APIError';
@@ -53,22 +54,20 @@ app.use((next: NextFunction) => {
 });
 
 // // Catch errors passed from controllers
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
 	// Change error catched to APIError if instance is not APIError
 	if (!(err instanceof APIError)) {
 		const newError = new APIError(
 			err.message || 'An unknown error occured',
 			httpStatus.INTERNAL_SERVER_ERROR
 		);
-
 		return next(newError);
 	}
-
 	return next(err);
 });
 
 // // app.use((err, req, res, next) => {}
-app.use((err: any, req: Request, res: Response) => {
+app.use((err: AppError, req: Request, res: Response) => {
 	res.status(err.status).send({
 		message: err.isPublic ? err.message : httpStatus[err.status],
 		stack: mappedVars.nodeEnv === 'development' ? err.stack : null,

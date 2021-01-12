@@ -9,7 +9,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 		return res.status(400).send('No files were uploaded.');
 	}
 
-	const { files, body, user } = req;
+	const { files, body, user } = req as any;
 	const { caption } = body;
 	try {
 		const imageUrl = await uploadImage(files.image);
@@ -43,7 +43,7 @@ const getAllFeeds = async (req: Request, res: Response, next: NextFunction) => {
 const getMyFeeds = async (req: Request, res: Response, next: NextFunction) => {
 	// Secure routes middleware will automatically add user object to req.user
 	try {
-		const { user } = req;
+		const { user } = req as any;
 		const { email } = user as any;
 		const feeds = await Feed.getMyFeeds(email);
 		res.status(httpStatus.ACCEPTED).json(feeds);

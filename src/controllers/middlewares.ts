@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 import APIError from '../errors/APIError';
 
 const validateFirebaseIdToken = async (
-	req: Request,
+	req: any,
 	res: Response,
 	next: NextFunction
 ) => {

@@ -9,6 +9,7 @@ WORKDIR /app
 ADD package.json /app/
 
 RUN npm i
+RUN ["npm", "run" , "build"]
 
 COPY . /app/
 

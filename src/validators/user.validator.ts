@@ -1,4 +1,4 @@
-import { body, query } from 'express-validator';
+import { body } from 'express-validator';
 import { strongPasswordRegex } from '../utils/constants';
 
 const createUserValidator = () => [
@@ -25,19 +25,4 @@ const loginValidator = () => [
 	body('password').isString().withMessage('password is required'),
 ];
 
-const validateEmailValidator = () => [
-	query('email').isEmail().withMessage('Email is required'),
-	query('token').isString().withMessage('validation token is required'),
-];
-
-const validateAccountActivate = () => [
-	body('email').isEmail().withMessage('Email is required'),
-	body('token').isString().withMessage('validation token is required'),
-];
-
-export {
-	createUserValidator,
-	loginValidator,
-	validateEmailValidator,
-	validateAccountActivate,
-};
+export { createUserValidator, loginValidator };

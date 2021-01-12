@@ -42,8 +42,9 @@ const loginController = async (
 
 const getTokenOwner = (req: Request, res: Response, next: NextFunction) => {
 	// Secure routes middleware will automatically add user object to req.user
-	if (req.user) {
-		return res.json(req.user);
+	const { user } = req as any;
+	if (user) {
+		return res.json(user);
 	}
 
 	const userNotFound = new APIError(
