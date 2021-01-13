@@ -15,7 +15,8 @@
     "test": "jest --forceExit --detectOpenHandles  --silent",
     "test-routes": "yarn test -t router",
     "test-models": "yarn test -t model",
-    "test-controllers": "yarn test -t controllers"
+    "test-controllers": "yarn test -t controllers",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "dependencies": {
     "@google-cloud/storage": "^5.7.1",
@@ -78,5 +79,6 @@
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.1",
     "typescript": "^4.1.3"
-  }
+  },
+  "heroku-run-build-script": true
 }
