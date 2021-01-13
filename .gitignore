@@ -3,7 +3,6 @@ build
 coverage
 package-lock.json
 .data
-.env
 
 # logs
 logs
