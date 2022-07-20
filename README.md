@@ -7,8 +7,6 @@
 * [Setup](#setup)
 * [Test](#test)
 * [Features](#features)
-* [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General info
@@ -85,11 +83,6 @@ To-do list:
 * some error handling
 * Add some testing
 
-## Status
-Project is: _in progress_ since there are some kinks that need some work
-
-## Inspiration
-This project serves as a test project for the company Ahun
 
 ## Contact
 Contact me using email silco2dev@gmail.com
